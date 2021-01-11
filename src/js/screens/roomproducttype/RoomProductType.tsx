@@ -17,9 +17,6 @@ const RoomProductType = (props: any) => {
                 setLoad(true)
             }
         });
-
-
-
     }, [])
     useEffect(() => {
         fetchProduct()

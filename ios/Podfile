@@ -10,7 +10,7 @@ target 'noithatshop' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'RNMomosdk', :path => '../node_modules/react-native-momosdk'
+  # pod 'RNMomosdk', :path => '../node_modules/react-native-momosdk'
 
   target 'noithatshopTests' do
     inherit! :complete

@@ -1,12 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { TouchableOpacity, View } from 'react-native';
+import { View, Text } from 'react-native';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
-import Fontisto from "react-native-vector-icons/Fontisto"
 
-import { Button, Text } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
 
 import InputLogin from '../../components/InputLogin';
 import { valid } from '../Signup.valid';
@@ -19,7 +18,6 @@ const SignupComponent = (props: { onBack: () => any }) => {
         resolver: yupResolver(valid),
         defaultValues: { username: "", password: "", passwordAgain: "", account: "" }
     });
-    const state = useSelector((state: any) => state)
 
     const dispatch = useDispatch();
 

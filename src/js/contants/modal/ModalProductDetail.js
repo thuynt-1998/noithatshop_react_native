@@ -22,7 +22,9 @@ const ModalProductDetail = (props) => {
   const [valueSelect, setValue] = useState({code: '', number: 1});
   const dispatch = useDispatch();
   const postCart = useCallback((data) => {
+    console.log(data);
     ProductServices.saveCart(data).then((res) => {
+      console.log(res);
       if (!res.originalError) {
         onClosed();
         if (title !== 'Mua ngay') {
@@ -36,15 +38,8 @@ const ModalProductDetail = (props) => {
           };
           WToast.show(toast);
         } else {
+          console.log('thuy');
           onNavigation();
-        }
-      } else if (res.status === 401) {
-        const status = dispatch(Creators.refresh());
-        if (!status) {
-          postCart();
-          if (title === 'Mua ngay') {
-            onNavigation();
-          }
         }
       }
     });
@@ -55,10 +50,9 @@ const ModalProductDetail = (props) => {
       price: valueSelect.code.productPrice,
       product: item,
     };
-    console.log(item);
-    console.log(data);
     const auth = await LoginServices.getItem();
     if (auth) {
+      console.log(auth);
       postCart(data);
     } else {
       onNavigation();
@@ -108,8 +102,7 @@ const ModalProductDetail = (props) => {
       position="bottom"
       style={[styles.containerModal, styles.borderTopRadius]}
       onClosed={onClosed}
-      useNativeDriver
-      >
+      useNativeDriver>
       <View style={[styles.containerModal, styles.borderTopRadius]}>
         <View style={[styles.borderTopRadius, styles.relative]}>
           <View style={[styles.containerImageModal]}>

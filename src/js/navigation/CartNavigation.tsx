@@ -32,7 +32,7 @@ const CartNavigation = (props: any) => {
     return (
         <CartStack.Navigator>
             {token && token !== "" ?
-                <CartStack.Screen name="cart1" component={() =>
+                <CartStack.Screen name="cart" component={() =>
                     <SafeAreaView style={{ flex: 1 }}>
                         <StatusBar backgroundColor="rgb(200,149,81)" />
                         <CartBuy />

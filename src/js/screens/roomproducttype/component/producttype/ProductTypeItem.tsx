@@ -16,15 +16,10 @@ const ProductTypeItem = (props: any) => {
         RoomServices.getProductByTypeId(item.id).then((res: any) => {
             if (!res.originalError)
                 if (res.data.length !== 0) {
-                    // console.log(res.data);
-
                     setList(res.data)
-
                 }
                 else { }
         });
-
-
     }, [])
     useEffect(() => {
         fecthData()

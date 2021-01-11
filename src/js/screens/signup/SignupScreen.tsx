@@ -1,9 +1,6 @@
 import React, { useCallback } from 'react';
 import { StatusBar, View, ImageBackground } from 'react-native';
-import { Appbar } from 'react-native-paper';
 
-
-import LoginForm from '../login/components/LoginForm';
 import { styles } from '../login/Login.style';
 import SignupComponent from './component/SignupComponent';
 

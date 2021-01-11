@@ -25,7 +25,6 @@ const FormOrder = (props: any) => {
     const { navigation } = props
 
     const onData = useCallback((data) => {
-        console.log(data);
         navigation.navigate("cartorder", { info: data })
     }, [])
     return (

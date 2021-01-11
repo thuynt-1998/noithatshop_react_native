@@ -1,15 +1,13 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { View, FlatList, StatusBar } from "react-native";
+import { View, FlatList, Linking } from "react-native";
 
 import styles from "./CartBuy.style";
 import LoginServices from "../../../sevices/api/LoginServices";
 import { useDispatch } from "react-redux";
-import Creators from "../../../action";
 import BottomCheck from "./component/BottomCheck";
 import ItemProductCheck from "./component/ItemProductCheck";
 import ListEmpty from "../../../contants/ListEmpty";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const CartScreen = (props: any) => {
     const [isCheckedAll, setCheckedAll] = useState(false);
@@ -17,6 +15,7 @@ const CartScreen = (props: any) => {
     const [isChecked, setChecked] = useState(false);
     const [data, setData] = useState<Array<any>>([]);
     const navigation = useNavigation()
+
     const onCheckedAll = useCallback(() => {
         if (isCheckedAll) {
             setCheckedAll(false);
@@ -111,6 +110,7 @@ const CartScreen = (props: any) => {
         navigation.navigate("cartorder", { data, sum: valueSum() })
     }, [data])
 
+
     return (
 
         <View style={[styles.flex1, { marginTop: 40 }]}>
@@ -121,6 +121,7 @@ const CartScreen = (props: any) => {
                     keyExtractor={(item: any) => item.id.toString()}
                     extraData={isChecked}
                 />
+
             </View>
             <BottomCheck
                 sum={sum}

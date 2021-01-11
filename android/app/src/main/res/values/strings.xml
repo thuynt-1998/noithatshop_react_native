@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">noithatshop</string>
+    <string name="filter_view_example_gizmos"> app://noithatshop</string>
 </resources>

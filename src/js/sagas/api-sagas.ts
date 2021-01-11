@@ -6,9 +6,9 @@ import {
   cancel,
   takeLatest,
   all,
-} from "redux-saga/effects";
-import Creators, { Types } from "../action";
-import Api from "../sevices/api/LoginServices";
+} from 'redux-saga/effects';
+import Creators, {Types} from '../action';
+import Api from '../sevices/api/LoginServices';
 
 export default function* watcherLoginSaga() {
   yield all([
@@ -19,15 +19,18 @@ export default function* watcherLoginSaga() {
 }
 
 export function* authorize(username: string, password: string) {
-  const { originalError, data, status } = yield call(
+  const {originalError, data, status} = yield call(
     Api.author,
     username,
-    password
+    password,
   );
+
   if (originalError) {
-    yield put(Creators.loginFailed({ error: originalError.message, status }));
+    yield put(Creators.loginFailed({error: originalError.message, status}));
   } else {
     yield put(Creators.loginSuccess(data));
+    console.log(data);
+
     const token = yield call(Api.setItem, data.jwtToken);
 
     return data;
@@ -35,9 +38,9 @@ export function* authorize(username: string, password: string) {
 }
 
 function* refreshToken() {
-  const { originalError, data, status } = yield call(Api.refresh);
+  const {originalError, data, status} = yield call(Api.refresh);
   if (originalError) {
-    yield put(Creators.loginFailed({ error: originalError.message, status }));
+    yield put(Creators.loginFailed({error: originalError.message, status}));
   } else {
     yield put(Creators.loginSuccess(data));
     const token = yield call(Api.setItem, data.jwtToken);
@@ -48,7 +51,7 @@ function* refreshToken() {
 
 export function* loginFlow() {
   while (true) {
-    const { username, password } = yield take(Types.LOGIN_REQUEST);
+    const {username, password} = yield take(Types.LOGIN_REQUEST);
     const task = yield fork(authorize, username, password);
 
     const action = yield take([Types.RESET, Types.LOGIN_FAILED]);
@@ -62,11 +65,11 @@ export function* loginFlow() {
 
 function* signupFlow() {
   while (true) {
-    const { user } = yield take(Types.SIGNUP_REQUEST);
+    const {user} = yield take(Types.SIGNUP_REQUEST);
 
-    const { originalError, data } = yield call(Api.signup, user);
+    const {originalError, data} = yield call(Api.signup, user);
     if (originalError) {
-      yield put(Creators.signupFailed({ error: originalError.message }));
+      yield put(Creators.signupFailed({error: originalError.message}));
     } else {
       yield put(Creators.signupSuccess(data));
       console.log(data);

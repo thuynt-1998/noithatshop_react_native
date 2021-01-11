@@ -1,21 +1,24 @@
-import AsyncStorage from "@react-native-community/async-storage";
-import api from "../../contants/https-base";
+import AsyncStorage from '@react-native-community/async-storage';
+import api from '../../contants/https-base';
 
 const author = (username: string, password: string) => {
-  return api.post("/login/customer", { username, password }).then((res) => res);
+  return api.post('/login/customer', {username, password}).then((res) => {
+    console.log(res);
+    return res;
+  });
 };
 const removeItem = async () => {
-  await AsyncStorage.removeItem("token");
+  await AsyncStorage.removeItem('token');
 };
 const setItem = async (token: string) => {
-  await AsyncStorage.setItem("token", JSON.stringify(token));
+  await AsyncStorage.setItem('token', JSON.stringify(token));
 };
 const getItem = async () => {
-  return await AsyncStorage.getItem("token");
+  return await AsyncStorage.getItem('token');
 };
 
 const signup = (data: any) => {
-  return api.post("/signup/customer", data).then((res) => {
+  return api.post('/signup/customer', data).then((res) => {
     return res;
   });
 };
@@ -23,9 +26,9 @@ const getCart = async () => {
   const value = await getItem();
   return api
     .get(
-      "/customer/getAll/cart",
+      '/customer/getAll/cart',
       {},
-      { headers: { Authorization: "Bearer " + JSON.parse(value) } }
+      {headers: {Authorization: 'Bearer ' + JSON.parse(value)}},
     )
     .then((res) => res);
 };
@@ -34,14 +37,14 @@ const refresh = async () => {
 
   return api
     .get(
-      "/refreshtoken",
+      '/refreshtoken',
       {},
       {
         headers: {
-          Authorization: "Bearer " + JSON.parse(value),
+          Authorization: 'Bearer ' + JSON.parse(value),
           isRefreshToken: true,
         },
-      }
+      },
     )
     .then((res) => res);
 };
